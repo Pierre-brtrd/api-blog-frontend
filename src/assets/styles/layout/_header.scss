@@ -12,9 +12,11 @@
     }
 
     &-links {
-        display: flex;
-        gap: 1rem;
         flex: 1;
-        align-self: center;
+    }
+
+    &-btn,
+    &-links {
+        @include flexbox($align: center, $gap: 1rem);
     }
 }

@@ -8,11 +8,25 @@
                 </li>
             </ul>
             <ul class="navbar-btn">
+                <li v-if="isAdmin">
+                    <div class="dropdown">
+                        <span class="btn-warning">Admin</span>
+                        <ul class="dropdown-content">
+                            <li class="dropdown-item">
+                                <RouterLink to="/admin/users">Users</RouterLink>
+                            </li>
+                            <li class="dropdown-item">
+                                <RouterLink to="/admin/artiles">Articles</RouterLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
                 <li v-if="!isLoggedIn">
                     <RouterLink to="/login" class="btn-primary">Login</RouterLink>
                 </li>
                 <li v-else>
-                    <button class="btn-primary" @click="logout">
+                    <button class="btn-danger" @click="logout">
                         Logout
                     </button>
                 </li>
@@ -30,6 +44,10 @@ const auth = useAuthStore()
 const router = useRouter()
 
 const isLoggedIn = computed(() => Boolean(auth.token))
+const isAdmin = computed(() => {
+    return Array.isArray(auth.user?.roles)
+        && auth.user.roles.includes('ROLE_ADMIN')
+})
 
 function logout() {
     auth.logout()
