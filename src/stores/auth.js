@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
         user: null,
         token: '',
     }),
+    persist: true,
     actions: {
         async login(username, password) {
             const { token } = await apiFetch('/login', {

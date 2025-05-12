@@ -4,4 +4,9 @@
     border-radius: $border-radius;
     border: 1px solid $dark-muted;
     padding: 1rem;
+
+    &-btn {
+        @include flexbox(space-between, center, $gap: 1rem);
+        margin-top: 1rem;
+    }
 }
