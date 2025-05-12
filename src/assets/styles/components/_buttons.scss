@@ -1,0 +1,30 @@
+@use "../abstracts/variables" as *;
+@use "sass:color";
+
+%btn {
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: inherit;
+
+    &:disabled,
+    &[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.btn-primary {
+    @extend %btn;
+    background: $secondary;
+    color: $primary;
+    border: none;
+
+    &:hover {
+        :not(:disabled) {
+            background: color.scale($secondary, $lightness: -20%);
+            color: $white;
+        }
+    }
+}

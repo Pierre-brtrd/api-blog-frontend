@@ -8,12 +8,12 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(username, password) {
-            const { token } = await apiFetch('/auth/login', {
+            const { token } = await apiFetch('/login', {
                 method: 'POST',
                 body: JSON.stringify({ username, password }),
             });
             this.token = token;
-            this.user = await apiFetch('/api/profile');
+            this.user = await apiFetch('/profile');
         },
         logout() {
             this.token = '';

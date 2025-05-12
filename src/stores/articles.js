@@ -7,7 +7,7 @@ export const useArticleStore = defineStore('articles', {
     }),
     actions: {
         async fetchAll() {
-            this.list = await apiFetch('/api/admin/articles')
+            this.list = await apiFetch('/admin/articles')
         }
     }
 })

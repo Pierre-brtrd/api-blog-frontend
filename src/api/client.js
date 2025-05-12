@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/store/auth'
+import { useAuthStore } from '@/stores/auth'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -24,8 +24,8 @@ export default async function apiFetch(path, options = {}) {
             const data = await response.json();
             error = data.message || JSON.stringify(json);
         } catch { }
-        throw new Error(`Erreur ${res.status}: ${err}`)
+        throw new Error(`${error}`)
     }
-    if (res.status === 204) return null
-    return res.json()
+    if (response.status === 204) return null
+    return response.json()
 }

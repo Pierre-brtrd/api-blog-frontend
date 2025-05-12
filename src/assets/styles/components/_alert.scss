@@ -1,0 +1,15 @@
+@use "../abstracts/variables" as *;
+@use "sass:color";
+
+%alert {
+    border-radius: $border-radius;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.alert-danger {
+    @extend %alert;
+    border: 1px solid $danger;
+    background: color.adjust($danger, $alpha: -0.4);
+    color: $white;
+}
