@@ -7,7 +7,8 @@
             <em v-for="role in mapRoles(user.roles)">{{ role }} </em>
         </p>
         <div class="card-btn">
-            <RouterLink :to="`/admin/users/${user.id}/edit`" class="btn-warning">Modifier</RouterLink>
+            <RouterLink :to="{ name: 'admin-user-edit', params: { id: user.id } }" class="btn-warning">Modifier
+            </RouterLink>
             <RouterLink :to="`/admin/users/${user.id}/delete`" class="btn-danger">Supprimer</RouterLink>
         </div>
     </div>

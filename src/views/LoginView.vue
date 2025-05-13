@@ -1,3 +1,10 @@
+<template>
+    <section class="container mt-3">
+        <h1 class="text-center">Page de connexion</h1>
+        <FormLogin @submit="handleLogin" :error="error" />
+    </section>
+</template>
+
 <script setup>
 import FormLogin from '../components/User/FormLogin.vue'
 import { ref } from 'vue'
@@ -19,10 +26,3 @@ async function handleLogin({ username, password }) {
     }
 }
 </script>
-
-<template>
-    <section class="container mt-3">
-        <h1 class="text-center">Page de connexion</h1>
-        <FormLogin @submit="handleLogin" :error="error" />
-    </section>
-</template>

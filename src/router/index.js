@@ -20,6 +20,13 @@ const router = createRouter({
       name: 'admin-users',
       component: () => import('@/views/Admin/UsersView.vue'),
       meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin/users/:id/edit',
+      name: 'admin-user-edit',
+      component: () => import('@/views/Admin/UserEditView.vue'),
+      meta: { requiresAuth: true },
+      props: true
     }
   ],
 })

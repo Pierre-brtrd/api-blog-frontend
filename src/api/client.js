@@ -6,6 +6,7 @@ export default async function apiFetch(path, options = {}) {
     const auth = useAuthStore();
     const headers = {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         ...(options.headers || {}),
     }
 
@@ -18,14 +19,26 @@ export default async function apiFetch(path, options = {}) {
         headers,
     });
 
-    if (!response.ok) {
-        let error = response.statusText;
-        try {
-            const data = await response.json();
-            error = data.message || JSON.stringify(json);
-        } catch { }
-        throw new Error(`${error}`)
+    let payload
+    const raw = await response.text()
+    try {
+        payload = JSON.parse(raw)
+    } catch {
+        payload = raw
     }
-    if (response.status === 204) return null
-    return response.json()
+
+    if (!response.ok) {
+        const msg =
+            (payload && payload.message) ||
+            (typeof payload === 'string' && payload) ||
+            response.statusText
+
+        throw new Error(msg)
+    }
+
+    if (response.status === 204) {
+        return null
+    }
+
+    return payload
 }
