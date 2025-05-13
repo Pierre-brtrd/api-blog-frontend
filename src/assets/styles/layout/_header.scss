@@ -1,0 +1,24 @@
+@use "../abstracts/index" as *;
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: $primary;
+    height: $header-height;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    &-content {
+        @include flexbox($align: center, $gap: 1rem);
+        padding: 0.5rem 0;
+    }
+
+    &-links {
+        flex: 1;
+    }
+
+    &-btn,
+    &-links {
+        @include flexbox($align: center, $gap: 1rem);
+    }
+}

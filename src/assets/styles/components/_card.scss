@@ -1,0 +1,21 @@
+@use "../abstracts/index" as *;
+
+.card {
+    border-radius: $border-radius;
+    border: 1px solid $dark-muted;
+    overflow: hidden;
+
+    &-body {
+        padding: 1rem;
+    }
+
+    &-img-wrapper {
+        aspect-ratio: 16/9;
+        overflow: hidden;
+    }
+
+    &-btn {
+        @include flexbox(space-between, center, $gap: 1rem);
+        margin-top: 1rem;
+    }
+}

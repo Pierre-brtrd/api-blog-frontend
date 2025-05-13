@@ -1,0 +1,11 @@
+@use "../abstracts/variables" as *;
+
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: $dark;
+    font-size: $default-font-size;
+}

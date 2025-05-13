@@ -1,85 +1,120 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { useRoute, RouterView } from 'vue-router'
+import { ref, watch } from 'vue'
+import Header from './components/Layout/Header.vue'
+import Flash from '@/components/Layout/Flash.vue'
+
+const route = useRoute()
+const prevDepth = ref(0)
+const transitionName = ref('slide-left')
+
+function getDepth(path) {
+  if (!path) {
+    return 0
+  }
+
+  return path.split('/').filter(Boolean).length
+}
+
+prevDepth.value = getDepth(route.path)
+
+watch(
+  () => route.fullPath,
+  (to, from) => {
+    const toDepth = getDepth(to)
+    const fromDepth = getDepth(from)
+
+    if (toDepth === fromDepth) {
+      transitionName.value = 'fade'
+      return
+    }
+
+    transitionName.value = toDepth > fromDepth
+      ? 'slide-left'
+      : 'slide-right'
+
+    prevDepth.value = toDepth
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <Header />
+  <main>
+    <Flash />
+    <RouterView v-slot="{ Component }">
+      <transition :name="transitionName" mode="out-in">
+        <component :is="Component" :key="route.fullPath" />
+      </transition>
+    </RouterView>
+  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.fade-leave-from,
+.fade-enter-to {
+  opacity: 1;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.slide-left-enter-active,
+.slide-right-enter-active,
+.slide-left-leave-active,
+.slide-right-leave-active {
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+/* Entrée slide-left  : new page vient de la droite */
+.slide-left-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.slide-left-enter-to {
+  transform: translateX(0);
+  opacity: 1;
 }
 
-nav a:first-of-type {
-  border: 0;
+/* Sortie slide-left : old page sort vers la gauche */
+.slide-left-leave-from {
+  transform: translateX(0);
+  opacity: 1;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.slide-left-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+/* Entrée slide-right : new page vient de la gauche */
+.slide-right-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.slide-right-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+/* Sortie slide-right : old page sort vers la droite */
+.slide-right-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.slide-right-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
 }
 </style>

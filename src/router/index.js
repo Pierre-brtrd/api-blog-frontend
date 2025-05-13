@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -10,14 +11,56 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/LoginView.vue'),
     },
+    {
+      path: '/admin/users',
+      name: 'admin-users',
+      component: () => import('@/views/Admin/User/UsersView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin/users/:id/edit',
+      name: 'admin-user-edit',
+      component: () => import('@/views/Admin/User/UserEditView.vue'),
+      meta: { requiresAuth: true },
+      props: true
+    },
+    {
+      path: '/admin/articles',
+      name: 'admin-articles',
+      component: () => import('@/views/Admin/Article/ArticlesView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin/articles/create',
+      name: 'admin-article-create',
+      component: () => import('@/views/Admin/Article/ArticleCreateView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin/articles/:id/edit',
+      name: 'admin-article-edit',
+      component: () => import('@/views/Admin/Article/ArticleEditView.vue'),
+      meta: { requiresAuth: true },
+      props: true
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: () => import('@/views/Frontend/ArticleListView.vue'),
+    }
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.token) {
+    return next('/login')
+  }
+  next()
 })
 
 export default router
