@@ -12,6 +12,21 @@ import { useRouter } from 'vue-router'
 import { useUsersStore } from '@/stores/users'
 import { useFlashStore } from '@/stores/flash'
 import FormUser from '@/components/User/FormUser.vue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+    title: 'Modification d\'un utilisateur - Blog API Rest Vue',
+    meta: [
+        {
+            name: 'description',
+            content: 'Modifiez les informations d\'un utilisateur sur le blog API Rest Vue.'
+        },
+        {
+            name: 'author',
+            content: 'Pierre Bertrand'
+        }
+    ]
+})
 
 const userStore = useUsersStore()
 const flashStore = useFlashStore()

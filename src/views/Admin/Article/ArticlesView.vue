@@ -9,6 +9,21 @@
 <script setup>
 import { provide } from 'vue';
 import ListArticle from '@/components/Article/ListArticle.vue';
+import { useHead } from '@vueuse/head';
+
+useHead({
+    title: 'Administration des articles - Blog API Rest Vue',
+    meta: [
+        {
+            name: 'description',
+            content: 'Gérez vos articles sur le blog API Rest Vue et partagez vos idées avec le monde.'
+        },
+        {
+            name: 'author',
+            content: 'Pierre Bertrand'
+        }
+    ]
+});
 
 provide('isAdmin', true);
 </script>

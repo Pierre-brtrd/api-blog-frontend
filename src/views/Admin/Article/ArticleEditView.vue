@@ -12,6 +12,21 @@ import FormArticle from '@/components/Article/FormArticle.vue';
 import { useArticleStore } from '@/stores/articles';
 import { useFlashStore } from '@/stores/flash';
 import { useRouter } from 'vue-router';
+import { useHead } from '@vueuse/head';
+
+useHead({
+    title: 'Modification d\'un article - Blog API Rest Vue',
+    meta: [
+        {
+            name: 'description',
+            content: 'Modifiez un article existant sur le blog API Rest Vue et partagez vos idées avec le monde.'
+        },
+        {
+            name: 'author',
+            content: 'Pierre Bertrand'
+        }
+    ]
+});
 
 const articleStore = useArticleStore();
 const flashStore = useFlashStore();

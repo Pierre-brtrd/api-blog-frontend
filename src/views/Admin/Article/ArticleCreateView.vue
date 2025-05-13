@@ -12,6 +12,21 @@ import { useFlashStore } from '@/stores/flash';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router'
 import FormArticle from '@/components/Article/FormArticle.vue';
+import { useHead } from '@vueuse/head';
+
+useHead({
+    title: 'Création d\'un article - Blog API Rest Vue',
+    meta: [
+        {
+            name: 'description',
+            content: 'Créez un nouvel article sur le blog API Rest Vue et partagez vos idées avec le monde.'
+        },
+        {
+            name: 'author',
+            content: 'Pierre Bertrand'
+        }
+    ]
+});
 
 const articleStore = useArticleStore();
 const flashStore = useFlashStore();
