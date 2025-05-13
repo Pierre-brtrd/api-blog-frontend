@@ -4,6 +4,7 @@ import apiFetch from '@/api/client'
 export const useArticleStore = defineStore('articles', {
     state: () => ({
         list: [],
+        article: null,
         pagination: { page: 1, total: 0, pages: 0, limit: 6 },
     }),
     actions: {
@@ -16,9 +17,18 @@ export const useArticleStore = defineStore('articles', {
             this.list = items
             this.pagination = meta
         },
+        async fetch(id) {
+            this.article = await apiFetch(`/admin/articles/${id}`)
+        },
         async create(data) {
             await apiFetch('/admin/articles', {
                 method: 'POST',
+                body: JSON.stringify(data),
+            })
+        },
+        async update(id, data) {
+            await apiFetch(`/admin/articles/${id}`, {
+                method: 'PATCH',
                 body: JSON.stringify(data),
             })
         },

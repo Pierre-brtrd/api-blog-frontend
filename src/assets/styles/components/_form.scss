@@ -32,11 +32,13 @@ form {
     cursor: pointer;
     user-select: none;
 
-    input[type="checkbox"] {
+    .switch-input {
         position: absolute;
         opacity: 0;
         width: 0;
         height: 0;
+        margin: 0;
+        padding: 0;
     }
 
     .slider {
@@ -60,17 +62,11 @@ form {
         }
     }
 
-    input:checked + .slider {
+    .switch-input:checked + .slider {
         background: $secondary;
-
-        &::before {
-            transform: translateX(1rem);
-        }
     }
-
-    input:disabled + .slider {
-        opacity: 0.6;
-        cursor: not-allowed;
+    .switch-input:checked + .slider::before {
+        transform: translateX(1rem);
     }
 
     .label-text {

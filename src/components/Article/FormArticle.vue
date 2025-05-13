@@ -13,9 +13,10 @@
             <ErrorMessage name="content" class="error-message" />
         </div>
         <div class="field">
-            <label class="switch" for="enabled-switch">
-                <Field name="enabled" as="input" value="true" type="checkbox" id="enabled-switch"
-                    class="visually-hidden" />
+            <label class="switch">
+                <Field name="enabled" type="checkbox" :value="true" :unchecked-value="false" v-slot="{ field }">
+                    <input v-bind="field" class="switch-input" type="checkbox" />
+                </Field>
                 <span class="slider"></span>
                 <span class="label-text">Actif</span>
             </label>
@@ -46,7 +47,7 @@ const schema = computed(() =>
 const initialValues = computed(() => ({
     title: props.article?.title || '',
     content: props.article?.content || '',
-    enabled: props.article?.enabled || false,
+    enabled: props.article.enabled ?? false,
 }))
 
 function onSubmit(values) {

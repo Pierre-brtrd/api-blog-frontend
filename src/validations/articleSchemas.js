@@ -12,9 +12,9 @@ export const creationSchema = yup.object({
         .required('Le contenu est requis')
         .min(10, 'Au moins 10 caractères')
         .max(5000, 'Au maximum 5000 caractères'),
-    // enabled: yup
-    //     .boolean()
-    //     .default(false)
+    enabled: yup
+        .boolean()
+        .default(false)
 })
 
 export const updateSchema = yup.object({
@@ -29,7 +29,7 @@ export const updateSchema = yup.object({
         .required('Le contenu est requis')
         .min(10, 'Au moins 10 caractères')
         .max(5000, 'Au maximum 5000 caractères'),
-    // enabled: yup
-    //     .boolean()
-    //     .default(false)
+    enabled: yup
+        .boolean()
+        .default(false)
 })

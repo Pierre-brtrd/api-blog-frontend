@@ -8,7 +8,7 @@
 
         <div class="field">
             <label class="switch">
-                <input name="enabled" type="checkbox" class="visually-hidden" :checked="article.enabled"
+                <input v-bind="field" class="switch-input" type="checkbox" :checked="article.enabled"
                     @change="onSwitch" />
                 <span class="slider"></span>
                 <span class="label-text">Actif</span>
