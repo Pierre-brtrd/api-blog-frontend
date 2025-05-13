@@ -35,6 +35,18 @@
     }
 }
 
+.btn-secondary {
+    @extend %btn;
+    background: $primary;
+    color: $white;
+    border: none;
+
+    &:not(:disabled):hover {
+        background: color.scale($primary, $lightness: -20%);
+        color: $white;
+    }
+}
+
 .btn-success {
     @extend %btn;
     background: $success;

@@ -31,11 +31,11 @@ const props = defineProps({
     error: { type: String, default: '' }
 })
 
-async function onSubmit() {
+function onSubmit() {
     loading.value = true
 
     try {
-        await emit('submit', { username: username.value, password: password.value })
+        emit('submit', { username: username.value, password: password.value })
     } finally {
         loading.value = false
     }

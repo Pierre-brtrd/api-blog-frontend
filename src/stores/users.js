@@ -15,6 +15,17 @@ export const useUsersStore = defineStore('users', {
                 method: 'PATCH',
                 body: JSON.stringify(user),
             })
+        },
+        async delete(id) {
+            await apiFetch(`/admin/users/${id}`, {
+                method: 'DELETE',
+            })
+
+            this.list = this.list.filter(u => u.id !== id)
+
+            if (this.user?.id === id) {
+                this.user = null
+            }
         }
     }
 })
