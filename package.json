@@ -1,7 +1,9 @@
 {
-  "name": "front-api-blog",
-  "version": "0.0.0",
+  "name": "pierre-brtrd_api-blog-frontend",
+  "description": "Vue 3 frontend for a blog",
+  "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
