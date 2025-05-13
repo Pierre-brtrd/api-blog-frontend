@@ -26,6 +26,7 @@
 .btn-primary {
     @extend %btn;
     background: $secondary;
+    box-shadow: 0 0 5px color.scale($secondary, $lightness: -20%);
     color: $primary;
     border: none;
 
@@ -38,6 +39,7 @@
 .btn-secondary {
     @extend %btn;
     background: $primary;
+    box-shadow: 0 0 5px color.scale($primary, $lightness: -20%);
     color: $white;
     border: none;
 
@@ -50,6 +52,7 @@
 .btn-success {
     @extend %btn;
     background: $success;
+    box-shadow: 0 0 5px color.scale($success, $lightness: -20%);
     color: $white;
     border: none;
 
@@ -62,6 +65,7 @@
 .btn-danger {
     @extend %btn;
     background: $danger;
+    box-shadow: 0 0 5px color.scale($danger, $lightness: -20%);
     color: $white;
     border: none;
 
@@ -74,6 +78,7 @@
 .btn-warning {
     @extend %btn;
     background: $warning;
+    box-shadow: 0 0 5px color.scale($warning, $lightness: -20%);
     color: $white;
     border: none;
 

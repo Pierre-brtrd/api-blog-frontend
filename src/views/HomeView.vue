@@ -1,7 +1,7 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
 <template>
-  <TheWelcome />
+  <Banner />
 </template>
+
+<script setup>
+import Banner from '@/components/Home/Banner.vue'
+</script>

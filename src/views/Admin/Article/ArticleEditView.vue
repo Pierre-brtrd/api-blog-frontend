@@ -35,9 +35,14 @@ onMounted(async () => {
 
 const article = computed(() => articleStore.article);
 
-async function handleUpdate(payload) {
+async function handleUpdate(payload, file) {
     try {
         await articleStore.update(id, payload);
+
+        if (file) {
+            await articleStore.uploadImage(id, file);
+        }
+
         flashStore.flash('Article mis à jour avec succès', 'success');
         router.push({ name: 'admin-articles' });
     } catch (err) {

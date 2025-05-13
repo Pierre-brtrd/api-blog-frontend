@@ -21,13 +21,13 @@ export const useArticleStore = defineStore('articles', {
             this.article = await apiFetch(`/admin/articles/${id}`)
         },
         async create(data) {
-            await apiFetch('/admin/articles', {
+            return await apiFetch('/admin/articles', {
                 method: 'POST',
                 body: JSON.stringify(data),
             })
         },
         async update(id, data) {
-            await apiFetch(`/admin/articles/${id}`, {
+            return await apiFetch(`/admin/articles/${id}`, {
                 method: 'PATCH',
                 body: JSON.stringify(data),
             })
@@ -45,6 +45,14 @@ export const useArticleStore = defineStore('articles', {
                 }
                 return item
             })
-        }
+        },
+        async uploadImage(id, file) {
+            const form = new FormData()
+            form.append('image', file)
+            return await apiFetch(`/admin/articles/${id}/upload`, {
+                method: 'POST',
+                body: form,
+            })
+        },
     }
 })

@@ -10,6 +10,11 @@ export default async function apiFetch(path, options = {}) {
         ...(options.headers || {}),
     }
 
+    const isFormData = options.body instanceof FormData
+    if (isFormData) {
+        delete headers['Content-Type']
+    }
+
     if (auth.token) {
         headers['Authorization'] = `Bearer ${auth.token}`
     }

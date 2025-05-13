@@ -1,5 +1,5 @@
 <template>
-    <form class="form card mt-3 w-50 center" @submit.prevent="onSubmit">
+    <form class="form card card-body mt-3 w-50 center" @submit.prevent="onSubmit">
         <div class="alert-danger" v-if="error">
             <p>{{ error }}</p>
         </div>

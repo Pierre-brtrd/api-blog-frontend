@@ -1,39 +1,43 @@
 <template>
     <div class="card">
-        <h2 class="text-primary">{{ article.title }}</h2>
-        <small class="text-muted">{{ article.slug }}</small>
-        <p class="text-muted">{{ formattedDate }}</p>
-        <p>{{ formattedContent }}</p>
-        <p class="text-muted mt-2">{{ article.user.fullName }}</p>
-
-        <div class="field">
-            <label class="switch">
-                <input v-bind="field" class="switch-input" type="checkbox" :checked="article.enabled"
-                    @change="onSwitch" />
-                <span class="slider"></span>
-                <span class="label-text">Actif</span>
-            </label>
+        <div v-if="article.imageName" class="card-img-wrapper">
+            <img :src="imageSrc" :alt="`Image de l'article ${article.title}`" loading="lazy" />
         </div>
+        <div class="card-body">
+            <h2 class="text-primary">{{ article.title }}</h2>
+            <small class="text-muted">{{ article.slug }}</small>
+            <p class="text-muted">{{ formattedDate }}</p>
+            <p>{{ formattedContent }}</p>
+            <p class="text-muted mt-2">{{ article.user.fullName }}</p>
 
-        <div class="card-btn">
-            <RouterLink :to="{ name: 'admin-article-edit', params: { id: article.id } }" class="btn-warning">
-                Modifier
-            </RouterLink>
+            <div class="field">
+                <label class="switch">
+                    <input class="switch-input" type="checkbox" :checked="article.enabled" @change="onSwitch" />
+                    <span class="slider"></span>
+                    <span class="label-text">Actif</span>
+                </label>
+            </div>
 
-            <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
-                {{ deleting ? 'Suppression…' : 'Supprimer' }}
-            </button>
+            <div class="card-btn">
+                <RouterLink :to="{ name: 'admin-article-edit', params: { id: article.id } }" class="btn-warning">
+                    Modifier
+                </RouterLink>
+
+                <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
+                    {{ deleting ? 'Suppression…' : 'Supprimer' }}
+                </button>
+            </div>
+
+            <ConfirmModal :visible="showConfirm" @confirm="onConfirmDelete" @cancel="showConfirm = false">
+                <template #title>
+                    Supprimer cet article ?
+                </template>
+                <template #message>
+                    Cette action est irréversible. Voulez-vous vraiment supprimer
+                    <strong>{{ article.title }}</strong> ?
+                </template>
+            </ConfirmModal>
         </div>
-
-        <ConfirmModal :visible="showConfirm" @confirm="onConfirmDelete" @cancel="showConfirm = false">
-            <template #title>
-                Supprimer cet article ?
-            </template>
-            <template #message>
-                Cette action est irréversible. Voulez-vous vraiment supprimer
-                <strong>{{ article.title }}</strong> ?
-            </template>
-        </ConfirmModal>
     </div>
 </template>
 
@@ -42,6 +46,14 @@ import { ref, computed } from 'vue'
 import { useArticleStore } from '@/stores/articles'
 import { useFlashStore } from '@/stores/flash'
 import ConfirmModal from '@/components/Layout/ConfirmModal.vue'
+
+const BASE_IMAGE_URL = import.meta.env.VITE_API_UPLOAD_IMAGE_URL
+
+const imageSrc = computed(() => {
+    return props.article.imageName
+        ? `${BASE_IMAGE_URL}/articles/${props.article.imageName}`
+        : null
+})
 
 const props = defineProps({
     article: { type: Object, required: true }

@@ -1,26 +1,28 @@
 <template>
     <div class="card">
-        <p class="text-primary">{{ user.firstName }} {{ user.lastName }}</p>
-        <p><small>{{ user.username }}</small></p>
-        <time :datetime="user.createdAt" class="text-muted">{{ formattedCreatedAt }}</time>
-        <p class="card-roles">
-            <em v-for="role in mapRoles(user.roles)">{{ role }} </em>
-        </p>
-        <div class="card-btn">
-            <RouterLink :to="{ name: 'admin-user-edit', params: { id: user.id } }" class="btn-warning">
-                Modifier
-            </RouterLink>
-            <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
-                {{ deleting ? 'Suppression…' : 'Supprimer' }}
-            </button>
+        <div class="card-body">
+            <h2 class="text-primary">{{ user.firstName }} {{ user.lastName }}</h2>
+            <p><small>{{ user.username }}</small></p>
+            <time :datetime="user.createdAt" class="text-muted">{{ formattedCreatedAt }}</time>
+            <p class="card-roles">
+                <em v-for="role in mapRoles(user.roles)">{{ role }} </em>
+            </p>
+            <div class="card-btn">
+                <RouterLink :to="{ name: 'admin-user-edit', params: { id: user.id } }" class="btn-warning">
+                    Modifier
+                </RouterLink>
+                <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
+                    {{ deleting ? 'Suppression…' : 'Supprimer' }}
+                </button>
+            </div>
+            <ConfirmModal :visible="showConfirm" @confirm="onConfirmDelete" @cancel="showConfirm = false">
+                <template #title>Supprimer cet utilisateur ?</template>
+                <template #message>
+                    Cette action est irréversible. Voulez-vous vraiment supprimer
+                    <strong>{{ user.firstName }} {{ user.lastName }}</strong> ?
+                </template>
+            </ConfirmModal>
         </div>
-        <ConfirmModal :visible="showConfirm" @confirm="onConfirmDelete" @cancel="showConfirm = false">
-            <template #title>Supprimer cet utilisateur ?</template>
-            <template #message>
-                Cette action est irréversible. Voulez-vous vraiment supprimer
-                <strong>{{ user.firstName }} {{ user.lastName }}</strong> ?
-            </template>
-        </ConfirmModal>
     </div>
 </template>
 
