@@ -26,3 +26,54 @@ form {
         margin-top: 0.5rem;
     }
 }
+
+.switch {
+    @include flexbox($align: center, $gap: 0.5rem, $display: inline-flex);
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: relative;
+        width: 2rem;
+        height: 1rem;
+        background: $dark-muted;
+        border-radius: 999px;
+        transition: background 0.2s ease;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: calc(1rem - 4px);
+            height: calc(1rem - 4px);
+            background: $white;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+    }
+
+    input:checked + .slider {
+        background: $secondary;
+
+        &::before {
+            transform: translateX(1rem);
+        }
+    }
+
+    input:disabled + .slider {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .label-text {
+        font-size: 0.875rem;
+    }
+}

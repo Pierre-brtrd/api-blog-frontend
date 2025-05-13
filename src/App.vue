@@ -24,7 +24,6 @@ watch(
     const toDepth = getDepth(to)
     const fromDepth = getDepth(from)
 
-    console.log('toDepth', toDepth, 'fromDepth', fromDepth)
     if (toDepth === fromDepth) {
       transitionName.value = 'fade'
       return

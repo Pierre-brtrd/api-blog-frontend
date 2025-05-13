@@ -18,13 +18,13 @@ const router = createRouter({
     {
       path: '/admin/users',
       name: 'admin-users',
-      component: () => import('@/views/Admin/UsersView.vue'),
+      component: () => import('@/views/Admin/User/UsersView.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: '/admin/users/:id/edit',
       name: 'admin-user-edit',
-      component: () => import('@/views/Admin/UserEditView.vue'),
+      component: () => import('@/views/Admin/User/UserEditView.vue'),
       meta: { requiresAuth: true },
       props: true
     },
@@ -34,6 +34,19 @@ const router = createRouter({
       component: () => import('@/views/Admin/Article/ArticlesView.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/admin/articles/create',
+      name: 'admin-article-create',
+      component: () => import('@/views/Admin/Article/ArticleCreateView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin/articles/:id/edit',
+      name: 'admin-article-edit',
+      component: () => import('@/views/Admin/Article/ArticleEditView.vue'),
+      meta: { requiresAuth: true },
+      props: true
+    }
   ],
 })
 

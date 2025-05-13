@@ -29,7 +29,7 @@ export default async function apiFetch(path, options = {}) {
 
     if (!response.ok) {
         const msg =
-            (payload && payload.message) ||
+            (payload && payload.detail) ||
             (typeof payload === 'string' && payload) ||
             response.statusText
 

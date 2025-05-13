@@ -27,7 +27,6 @@ onMounted(async () => {
             throw new Error('Utilisateur non trouvé')
         }
     } catch (err) {
-        console.error(err)
         flashStore.flash(err, 'danger')
 
         return router.replace({ name: 'admin-users' })

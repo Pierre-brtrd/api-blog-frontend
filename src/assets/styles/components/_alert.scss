@@ -14,7 +14,8 @@
 .alert-danger {
     @extend %alert;
     border: 1px solid $danger;
-    background: color.adjust($danger, $alpha: -0.4);
+    background: $danger;
+    box-shadow: 0 0 15px 10px color.adjust($danger, $alpha: -0.6);
     color: $white;
 }
 
@@ -30,13 +31,15 @@
 .alert-warning {
     @extend %alert;
     border: 1px solid $warning;
-    background: color.adjust($warning, $alpha: -0.4);
+    background: $warning;
+    box-shadow: 0 0 15px 10px color.adjust($warning, $alpha: -0.6);
     color: $white;
 }
 
 .alert-info {
     @extend %alert;
     border: 1px solid $info;
-    background: color.adjust($info, $alpha: -0.4);
+    background: $info;
+    box-shadow: 0 0 15px 10px color.adjust($info, $alpha: -0.6);
     color: $white;
 }
