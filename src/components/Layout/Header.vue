@@ -16,7 +16,7 @@
                                 <RouterLink to="/admin/users">Users</RouterLink>
                             </li>
                             <li class="dropdown-item">
-                                <RouterLink to="/admin/artiles">Articles</RouterLink>
+                                <RouterLink to="/admin/articles">Articles</RouterLink>
                             </li>
                         </ul>
                     </div>

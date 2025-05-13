@@ -7,17 +7,11 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, computed } from 'vue'
+import { computed } from 'vue'
 import { useFlashStore } from '@/stores/flash'
 
 const flash = useFlashStore()
 const type = computed(() => flash.type || 'info')
-
-onBeforeUnmount(() => {
-    if (timer) {
-        clearTimeout(timer)
-    }
-})
 </script>
 
 <style scoped lang="scss">

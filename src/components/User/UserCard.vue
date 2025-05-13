@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { mapRoles } from '@/utils/roleMap'
 import { useUsersStore } from '@/stores/users'
 import { useFlashStore } from '@/stores/flash'

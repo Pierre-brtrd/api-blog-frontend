@@ -20,7 +20,7 @@ async function handleLogin({ username, password }) {
     error.value = ''
     try {
         await auth.login(username, password)
-        router.push('/home')
+        router.push('/')
     } catch (err) {
         error.value = err.message || 'Identifiants invalides'
     }
