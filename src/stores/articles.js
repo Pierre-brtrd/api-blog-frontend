@@ -8,6 +8,14 @@ export const useArticleStore = defineStore('articles', {
         pagination: { page: 1, total: 0, pages: 0, limit: 6 },
     }),
     actions: {
+        async fetchAllEnabledPagination(filters) {
+            const { items, meta } = await apiFetch(
+                `/articles${filters}`
+            )
+
+            this.list = items
+            this.pagination = meta
+        },
         async fetchAll() {
             this.list = await apiFetch('/admin/articles')
         },

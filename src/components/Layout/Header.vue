@@ -6,6 +6,9 @@
                 <li>
                     <RouterLink to="/">Home</RouterLink>
                 </li>
+                <li>
+                    <RouterLink :to="{ name: 'articles' }">Articles</RouterLink>
+                </li>
             </ul>
             <ul class="navbar-btn">
                 <li v-if="isAdmin">

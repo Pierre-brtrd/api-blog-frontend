@@ -7,5 +7,8 @@
 </template>
 
 <script setup>
+import { provide } from 'vue';
 import ListArticle from '@/components/Article/ListArticle.vue';
+
+provide('isAdmin', true);
 </script>

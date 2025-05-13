@@ -10,7 +10,7 @@
             <p>{{ formattedContent }}</p>
             <p class="text-muted mt-2">{{ article.user.fullName }}</p>
 
-            <div class="field">
+            <div v-if="isAdmin" class="field">
                 <label class="switch">
                     <input class="switch-input" type="checkbox" :checked="article.enabled" @change="onSwitch" />
                     <span class="slider"></span>
@@ -18,7 +18,7 @@
                 </label>
             </div>
 
-            <div class="card-btn">
+            <div v-if="isAdmin" class="card-btn">
                 <RouterLink :to="{ name: 'admin-article-edit', params: { id: article.id } }" class="btn-warning">
                     Modifier
                 </RouterLink>
@@ -42,10 +42,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { inject, ref, computed } from 'vue'
 import { useArticleStore } from '@/stores/articles'
 import { useFlashStore } from '@/stores/flash'
 import ConfirmModal from '@/components/Layout/ConfirmModal.vue'
+
+const isAdmin = inject('isAdmin', false)
 
 const BASE_IMAGE_URL = import.meta.env.VITE_API_UPLOAD_IMAGE_URL
 

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { inject, onMounted } from 'vue'
 import { useArticleStore } from '@/stores/articles';
 import { useFlashStore } from '@/stores/flash';
 import ArticleCard from './ArticleCard.vue';
@@ -17,9 +17,15 @@ import PaginationControls from '../Filter/PaginationControls.vue';
 
 const articleStore = useArticleStore()
 
+const isAdmin = inject('isAdmin', false)
+
 function fetchPage(page) {
     const limit = articleStore.pagination.limit
-    articleStore.fetchPagination(`?page=${page}&limit=${limit}`)
+    if (isAdmin) {
+        articleStore.fetchPagination(`?page=${page}&limit=${limit}`)
+    } else {
+        articleStore.fetchAllEnabledPagination(`?page=${page}&limit=${limit}&enabled=true`)
+    }
 }
 
 onMounted(() => {
@@ -37,6 +43,10 @@ function onArticleDeleted(id) {
 const flashStore = useFlashStore()
 
 function changeVisibility(id) {
+    if (isAdmin) {
+        return;
+    }
+
     try {
         articleStore.switch(id)
     } catch (error) {

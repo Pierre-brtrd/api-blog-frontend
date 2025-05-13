@@ -46,6 +46,11 @@ const router = createRouter({
       component: () => import('@/views/Admin/Article/ArticleEditView.vue'),
       meta: { requiresAuth: true },
       props: true
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: () => import('@/views/Frontend/ArticleListView.vue'),
     }
   ],
 })
