@@ -94,11 +94,7 @@ function changeVisibility(id) {
 
 <style lang="scss" scoped>
 .list {
-    @include flexbox(space-between, center, $gap: 1rem);
+    @include grid($columns: repeat(auto-fill, minmax(30%, 1fr)), $gap: 1rem, $align: stretch);
     margin-top: 1rem;
-
-    &>* {
-        flex: 0 0 30%;
-    }
 }
 </style>

@@ -40,6 +40,7 @@ const props = defineProps({
     display: flex;
     flex-direction: column;
     height: var(--height-card);
+    width: 100%;
 
     .skeleton-header {
         flex: 0 0 50%;
