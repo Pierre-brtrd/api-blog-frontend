@@ -1,4 +1,6 @@
 import '@/assets/styles/main.scss'
+import 'github-markdown-css/github-markdown.css'
+import 'highlight.js/styles/github.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

@@ -30,6 +30,9 @@ export const useArticleStore = defineStore('articles', {
         async fetch(id) {
             this.article = await apiFetch(`/admin/articles/${id}`)
         },
+        async fetchBySlug(slug) {
+            this.article = await apiFetch(`/articles/${slug}`)
+        },
         async create(data) {
             return await apiFetch('/admin/articles', {
                 method: 'POST',

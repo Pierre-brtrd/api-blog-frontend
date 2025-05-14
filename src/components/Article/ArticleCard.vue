@@ -4,7 +4,9 @@
             <img :src="imageSrc" :alt="`Image de l'article ${article.title}`" loading="lazy" />
         </div>
         <div class="card-body">
-            <h2 class="text-primary">{{ article.title }}</h2>
+            <RouterLink :to="{ name: 'article-show', params: { slug: article.slug } }" class="card-link">
+                <h2 class="text-primary">{{ article.title }}</h2>
+            </RouterLink>
             <small class="text-muted">{{ article.slug }}</small>
             <p class="text-muted">{{ formattedDate }}</p>
             <p>{{ formattedContent }}</p>

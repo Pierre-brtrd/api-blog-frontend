@@ -54,11 +54,17 @@ const router = createRouter({
       component: () => import('@/views/Frontend/ArticleListView.vue'),
     },
     {
+      path: '/articles/:slug',
+      name: 'article-show',
+      component: () => import('@/views/Frontend/ArticleShowView.vue'),
+      props: true
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('@/views/Frontend/ProfileView.vue'),
       meta: { requiresAuth: true },
-    }
+    },
   ],
 })
 
