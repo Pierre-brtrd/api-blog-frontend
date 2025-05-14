@@ -1,8 +1,8 @@
 <template>
     <section class="banner">
         <div class="banner-content">
-            <h1 class="banner-title">Bienvenue sur notre site !</h1>
-            <p>Découvrez nos articles et restez informé.</p>
+            <h1 class="banner-title">Bienvenue sur le blog API REST !</h1>
+            <p>Découvrez nos articles VueJs et Symfony et restez informé.</p>
             <RouterLink :to="{ name: 'articles' }" class="btn-primary">Voir les articles</RouterLink>
         </div>
     </section>

@@ -8,7 +8,7 @@
             <small class="text-muted">{{ article.slug }}</small>
             <p class="text-muted">{{ formattedDate }}</p>
             <p>{{ formattedContent }}</p>
-            <p class="text-muted mt-2">{{ article.user.fullName }}</p>
+            <p v-if="article.user" class="text-muted mt-2">{{ article.user.fullName }}</p>
 
             <div v-if="isAdmin" class="field">
                 <label class="switch">

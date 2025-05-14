@@ -13,6 +13,9 @@
                 </li>
             </ul>
             <ul class="navbar-btn">
+                <li v-if="isLoggedIn">
+                    <RouterLink :to="{ name: 'profile' }" class="btn-primary">Profile</RouterLink>
+                </li>
                 <li v-if="isAdmin">
                     <div class="dropdown">
                         <span class="btn-warning">Admin</span>

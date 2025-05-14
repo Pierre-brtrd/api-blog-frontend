@@ -4,6 +4,8 @@ import apiFetch from '@/api/client'
 export const useArticleStore = defineStore('articles', {
     state: () => ({
         list: [],
+        userList: [],
+        userPagination: { page: 1, total: 0, pages: 0, limit: 6 },
         article: null,
         pagination: { page: 1, total: 0, pages: 0, limit: 6 },
     }),
@@ -62,5 +64,13 @@ export const useArticleStore = defineStore('articles', {
                 body: form,
             })
         },
+        async fetchByUser(id, filters) {
+            const { items, meta } = await apiFetch(
+                `/articles/user/${id}${filters}`
+            )
+
+            this.userList = items
+            this.userPagination = meta
+        }
     }
 })
