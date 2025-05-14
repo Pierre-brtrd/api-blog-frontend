@@ -5,6 +5,7 @@
     border: 1px solid $dark-muted;
     overflow: hidden;
     height: 100%;
+    box-shadow: 0 0 20px rgba($dark-muted, 0.2);
 
     &-body {
         padding: 1rem;

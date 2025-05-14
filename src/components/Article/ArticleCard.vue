@@ -72,9 +72,9 @@ const formattedDate = computed(() => {
 })
 
 const formattedContent = computed(() => {
-    return props.article.content?.length > 100
-        ? props.article.content.substring(0, 100) + '…'
-        : props.article.content
+    return props.article.shortContent?.length > 100
+        ? props.article.shortContent.substring(0, 100) + '…'
+        : props.article.shortContent
 })
 
 const articleStore = useArticleStore()

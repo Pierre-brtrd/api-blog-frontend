@@ -32,7 +32,7 @@ function cancel() {
 
 <style lang="scss" scoped>
 .modal {
-    background: white;
+    background: $dark-muted;
     border-radius: 4px;
     max-width: 400px;
     width: 100%;

@@ -8,9 +8,15 @@
             <ErrorMessage name="title" class="error-message" />
         </div>
         <div class="field">
-            <label for="content">Contenu</label>
-            <Field name="content" as="textarea" class="input" rows="10" required
-                placeholder="Contenu de votre article" />
+            <label for="shortContent">Présentation courte</label>
+            <Field name="shortContent" type="text" class="input" placeholder="Présentation courte de votre article"
+                required />
+            <ErrorMessage name="shortContent" class="error-message" />
+        </div>
+        <div class="field">
+            <label for="content">Contenu (Markdown)</label>
+            <Field name="content" as="textarea" id="content" rows="8" class="textarea"
+                placeholder="Écrivez votre article en Markdown…" />
             <ErrorMessage name="content" class="error-message" />
         </div>
         <div class="field">
@@ -61,6 +67,7 @@ const schema = computed(() =>
 const initialValues = computed(() => ({
     title: props.article?.title || '',
     content: props.article?.content || '',
+    shortContent: props.article?.shortContent || '',
     enabled: props.article?.enabled ?? false,
 }))
 
