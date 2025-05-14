@@ -8,36 +8,32 @@
 
 <script setup>
 import 'ckeditor5/ckeditor5.css';
+import 'highlight.js/styles/atom-one-dark.css'
 
-import { computed } from 'vue'
-import MarkdownIt from 'markdown-it'
+import { computed, onMounted, nextTick } from 'vue'
 import DOMPurify from 'dompurify'
+import hljs from 'highlight.js'
 
 const props = defineProps({
     article: { type: Object, required: true },
 })
 
-const md = new MarkdownIt({
-    html: true,  // autorise le HTML « inline » dans le Markdown
-    linkify: true,  // transforme automatiquement les URL en <a>
-    typographer: true,  // ligatures, etc.
-})
-
-const rawShortHtml = computed(() =>
-    props.article.shortContent
-        ? md.render(props.article.shortContent)
-        : ''
-)
 const rawFullHtml = computed(() =>
-    md.render(props.article.content || '')
+    props.article.content || ''
 )
 
-const sanitizedShortHtml = computed(() =>
-    DOMPurify.sanitize(rawShortHtml.value)
-)
 const sanitizedFullHtml = computed(() =>
     DOMPurify.sanitize(rawFullHtml.value)
 )
+
+onMounted(async () => {
+    // wait for DOM update
+    await nextTick()
+    document.querySelectorAll('pre code').forEach(block => {
+        hljs.highlightElement(block)
+    })
+})
+
 </script>
 <style lang="scss" scoped>
 .article-content {
@@ -47,5 +43,17 @@ const sanitizedFullHtml = computed(() =>
         max-width: 100%;
         height: auto;
     }
+}
+</style>
+
+<style>
+.ck-content pre {
+    padding: var(--base-size-16) !important;
+    overflow: auto !important;
+    font-size: 85% !important;
+    line-height: 1.45 !important;
+    color: var(--fgColor-default) !important;
+    background-color: var(--bgColor-muted) !important;
+    border-radius: 6px !important;
 }
 </style>

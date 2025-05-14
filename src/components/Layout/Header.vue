@@ -26,6 +26,9 @@
                             <li class="dropdown-item">
                                 <RouterLink to="/admin/articles">Articles</RouterLink>
                             </li>
+                            <li class="dropdown-item">
+                                <RouterLink :to="{ name: 'admin-medias' }">Medias</RouterLink>
+                            </li>
                         </ul>
                     </div>
 

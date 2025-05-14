@@ -65,6 +65,12 @@ const router = createRouter({
       component: () => import('@/views/Frontend/ProfileView.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/admin/medias',
+      name: 'admin-medias',
+      component: () => import('@/views/Admin/Media/MediasView.vue'),
+      meta: { requiresAuth: true },
+    }
   ],
 })
 
