@@ -23,6 +23,16 @@ ol {
     list-style: none;
 }
 
+.article-content {
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+}
+
 img,
 video,
 picture,

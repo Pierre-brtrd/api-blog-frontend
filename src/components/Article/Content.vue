@@ -2,11 +2,13 @@
     <section id="article-content" class="container mt-5">
         <h2 class="title">{{ article.title }}</h2>
         <hr class="separator-secondary" />
-        <div class="markdown-body article-content" v-html="sanitizedFullHtml"></div>
+        <div class="markdown-body article-content ck-content" v-html="sanitizedFullHtml"></div>
     </section>
 </template>
 
 <script setup>
+import 'ckeditor5/ckeditor5.css';
+
 import { computed } from 'vue'
 import MarkdownIt from 'markdown-it'
 import DOMPurify from 'dompurify'

@@ -14,10 +14,13 @@
             <ErrorMessage name="shortContent" class="error-message" />
         </div>
         <div class="field">
-            <label for="content">Contenu (Markdown)</label>
-            <Field name="content" as="textarea" id="content" rows="8" class="textarea"
-                placeholder="Écrivez votre article en Markdown…" />
-            <ErrorMessage name="content" class="error-message" />
+            <label for="content">Contenu</label>
+            <Field name="content" v-slot="{ field, meta, errors }">
+                <RichEditor v-model="field.value" @ready="onEditorReady" />
+                <p v-if="meta.touched && errors.length" class="error-message">
+                    {{ errors[0] }}
+                </p>
+            </Field>
         </div>
         <div class="field">
             <label class="file-input">
@@ -52,6 +55,7 @@ import { ref } from 'vue'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { creationSchema, updateSchema } from '@/validations/articleSchemas'
 import { computed } from 'vue'
+import RichEditor from './RichEditor.vue'
 
 const props = defineProps({
     article: { type: Object },
@@ -75,7 +79,6 @@ const file = ref(null)
 const fileName = ref(null)
 const previewUrl = ref(null)
 const fileError = ref(null)
-const uploading = ref(false)
 
 const previewArticleUrl = computed(() => {
     if (props.article?.imageName) {
@@ -116,7 +119,14 @@ function onFileChange(event) {
     fileName.value = f.name
 }
 
+const editorInstance = ref(null)
+
+function onEditorReady(editor) {
+    editorInstance.value = editor
+}
+
 function onSubmit(values) {
+    values.content = editorInstance.value.getData()
     emit('submit', values, file.value)
 }
 </script>
