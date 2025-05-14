@@ -87,3 +87,8 @@
         color: $white;
     }
 }
+
+.btn-fixed {
+    position: absolute;
+    top: calc($header-height + 2rem);
+}

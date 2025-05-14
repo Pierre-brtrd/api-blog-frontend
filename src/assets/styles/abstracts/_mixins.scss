@@ -6,3 +6,7 @@
     gap: $gap;
     flex-wrap: $wrap;
 }
+
+@mixin fluid-type($min, $fluid, $max) {
+    font-size: clamp($min, $fluid, $max);
+}

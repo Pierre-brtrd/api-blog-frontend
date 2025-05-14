@@ -9,6 +9,14 @@ textarea {
     padding: 0.5rem;
     border: 1px solid $dark-muted;
     border-radius: $border-radius;
+    background: $dark-soft;
+    color: $white;
+
+    &:focus {
+        outline: none;
+        border-color: $secondary;
+        box-shadow: 0 0 5px color.adjust($secondary, $alpha: -0.5);
+    }
 }
 
 .field {

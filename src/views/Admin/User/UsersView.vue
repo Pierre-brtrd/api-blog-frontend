@@ -1,6 +1,7 @@
 <template>
     <section class="container mt-3">
-        <h1 class="text-center">Liste des utilisateurs</h1>
+        <h1 class="title">Liste des utilisateurs</h1>
+        <hr class="separator-secondary">
         <ListUser />
     </section>
 </template>

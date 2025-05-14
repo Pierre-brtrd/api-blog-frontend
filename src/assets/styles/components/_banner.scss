@@ -14,6 +14,10 @@
         background: color.adjust($secondary, $alpha: -0.4);
         backdrop-filter: blur(5px);
         box-shadow: 0 0 50px 10px color.adjust($secondary, $alpha: -0.6);
+
+        .banner-title {
+            color: $white;
+        }
     }
 
     &::before {

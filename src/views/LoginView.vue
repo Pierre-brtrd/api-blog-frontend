@@ -1,6 +1,7 @@
 <template>
     <section class="container mt-3">
-        <h1 class="text-center">Page de connexion</h1>
+        <h1 class="title text-center">Page de connexion</h1>
+        <hr class="separator-secondary w-10 mx-auto " />
         <FormLogin @submit="handleLogin" :error="error" />
     </section>
 </template>

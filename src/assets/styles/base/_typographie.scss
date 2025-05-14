@@ -1,11 +1,63 @@
-@use "../abstracts/variables" as *;
+@use "../abstracts/index" as *;
+@use "sass:map";
 
 body {
     font-family: $default-font;
-    color: $dark;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
     font-family: $heading-font;
-    color: $indigo;
+    color: $secondary;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+$heading-scales: (
+    h1: (
+        min: 1.75rem,
+        fluid: 4vw,
+        max: 3rem,
+        weight: 700
+    ),
+    h2: (
+        min: 1.35rem,
+        fluid: 3.25vw,
+        max: 2.35rem,
+        weight: 700
+    ),
+    h3: (
+        min: 1.25rem,
+        fluid: 3vw,
+        max: 2rem,
+        weight: 700
+    ),
+    h4: (
+        min: 1.125rem,
+        fluid: 2.5vw,
+        max: 1.75rem,
+        weight: 500
+    ),
+    h5: (
+        min: 1rem,
+        fluid: 2vw,
+        max: 1.5rem,
+        weight: 500
+    ),
+    h6: (
+        min: 0.875rem,
+        fluid: 1.5vw,
+        max: 1.25rem,
+        weight: 500
+    )
+);
+
+@each $tag, $values in $heading-scales {
+    #{$tag} {
+        @include fluid-type(map.get($values, min), map.get($values, fluid), map.get($values, max));
+        font-weight: map.get($values, weight);
+    }
+}
+
+.title {
+    text-shadow: 0 0 5px $secondary;
 }

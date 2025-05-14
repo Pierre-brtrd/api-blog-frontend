@@ -1,6 +1,6 @@
 <template>
     <Form :key="props.user.id" @submit="onSubmit" v-slot="{ handleSubmit, meta }"
-        class="form card card-body mt-3 w-70 center" :validation-schema="schema" :initial-values="initialValues"
+        class="form card card-body mt-5 w-70 center" :validation-schema="schema" :initial-values="initialValues"
         validate-on-mount validate-on-change validate-on-submit>
         <div class="field">
             <label for="username">Username</label>

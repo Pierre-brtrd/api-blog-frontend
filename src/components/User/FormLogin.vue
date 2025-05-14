@@ -1,11 +1,11 @@
 <template>
-    <form class="form card card-body mt-3 w-50 center" @submit.prevent="onSubmit">
+    <form class="form card card-body mt-5 w-50 center" @submit.prevent="onSubmit">
         <div class="alert-danger" v-if="error">
             <p>{{ error }}</p>
         </div>
         <div class="field">
             <label for="username">Username</label>
-            <input type="text" v-model="username" id="username" placeholder="JohnDoe" required>
+            <input type="text" v-model="username" id="username" autocomplete="username" placeholder="JohnDoe" required>
         </div>
         <div class="field">
             <label for="password">Mot de passe</label>

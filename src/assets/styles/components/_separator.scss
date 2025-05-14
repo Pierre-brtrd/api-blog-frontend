@@ -1,0 +1,27 @@
+@use "../abstracts/variables" as *;
+
+%separator {
+    border-radius: $border-radius;
+    height: 5px;
+    margin-bottom: 0.75rem;
+}
+
+.separator {
+    &-primary {
+        @extend %separator;
+
+        background: $primary;
+        border: 1px solid $primary;
+        background: $primary;
+        box-shadow: 0 0 10px $primary;
+    }
+
+    &-secondary {
+        @extend %separator;
+
+        background: $secondary;
+        border: 1px solid $secondary;
+        background: $secondary;
+        box-shadow: 0 0 5px $secondary;
+    }
+}

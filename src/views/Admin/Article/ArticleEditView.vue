@@ -1,14 +1,16 @@
 <template>
     <section v-if="article" class="container mt-3">
-        <h1 class="text-center">Modification de l'article {{ article?.title }}</h1>
+        <h1 class="title text-center">Modification de l'article</h1>
+        <hr class="separator-secondary w-50 mx-auto" />
         <FormArticle :article="article" :is-new="false" @submit="handleUpdate" />
-        <RouterLink :to="{ name: 'admin-articles' }" class="btn btn-primary mt-5">Retour à la liste</RouterLink>
+        <BackToList :to="{ name: 'admin-articles' }" />
     </section>
 </template>
 
 <script setup>
 import { computed, onMounted } from 'vue'
 import FormArticle from '@/components/Article/FormArticle.vue';
+import BackToList from '@/components/Common/BackToList.vue';
 import { useArticleStore } from '@/stores/articles';
 import { useFlashStore } from '@/stores/flash';
 import { useRouter } from 'vue-router';

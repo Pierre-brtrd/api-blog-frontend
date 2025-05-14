@@ -1,8 +1,9 @@
 <template>
     <section v-if="user" class="container mt-3">
-        <h1 class="text-center">Modification de {{ user?.fullName }}</h1>
+        <h1 class="title text-center">Modification de {{ user?.fullName }}</h1>
+        <hr class="separator-secondary w-30 mx-auto" />
         <FormUser :user="user" :is-new="false" @submit="handleUpdate" />
-        <RouterLink :to="{ name: 'admin-users' }" class="btn-primary mt-4">Retour à la liste</RouterLink>
+        <BackToList :to="{ name: 'admin-users' }" />
     </section>
 </template>
 
@@ -12,6 +13,7 @@ import { useRouter } from 'vue-router'
 import { useUsersStore } from '@/stores/users'
 import { useFlashStore } from '@/stores/flash'
 import FormUser from '@/components/User/FormUser.vue'
+import BackToList from '@/components/Common/BackToList.vue'
 import { useHead } from '@vueuse/head'
 
 useHead({
