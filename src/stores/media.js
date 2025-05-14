@@ -5,7 +5,7 @@ export const useMediaStore = defineStore('media', {
     state: () => ({
         list: [],
         media: null,
-        pagination: { total: 0, limit: 6, page: 1, pages: 1 },
+        pagination: { total: 0, limit: 8, page: 1, pages: 1 },
     }),
     actions: {
         async fetchAll() {
