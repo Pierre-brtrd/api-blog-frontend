@@ -1,12 +1,16 @@
 <template>
     <div class="filter-grid">
         <p class="text-muted">Nombre de users total: {{ userStore.pagination.total }}</p>
-        <SortFilter :options="sortOptions" v-model="selectedSort" />
+        <div class="filter-fields">
+            <SearchFilter v-model:searchQuery="search" />
+            <SortFilter :options="sortOptions" v-model="selectedSort" />
+        </div>
     </div>
     <div class="list">
         <SkeletonCard v-if="loading" v-for="n in userStore.pagination.limit" :key="n" :image="false" />
-        <UserCard v-for="user in userStore.list" :key="user.id" :user="user" />
+        <UserCard v-if="!loading" v-for="user in userStore.list" :key="user.id" :user="user" />
     </div>
+    <NotFoundCard v-if="!loading && userStore.list.length === 0" />
     <PaginationControls :page="userStore.pagination.page" :pages="userStore.pagination.pages" @change="onPageChange" />
 </template>
 
@@ -17,6 +21,8 @@ import UserCard from '@/components/User/UserCard.vue'
 import PaginationControls from '../Filter/PaginationControls.vue'
 import SkeletonCard from '../Common/SkeletonCard.vue'
 import SortFilter from '../Filter/SortFilter.vue'
+import NotFoundCard from '../Common/NotFoundCard.vue'
+import SearchFilter from '../Filter/SearchFilter.vue'
 
 const userStore = useUsersStore()
 const loading = ref(true)
@@ -31,17 +37,23 @@ const sortOptions = [
 ]
 
 const selectedSort = ref(sortOptions[0])
-
+const search = ref('')
 watch(selectedSort, () => fetchPage(userStore.pagination.page))
+watch(search, () => fetchPage(userStore.pagination.page))
 
-function fetchPage(page) {
+async function fetchPage(page) {
     loading.value = true
     const limit = userStore.pagination.limit
     const sort = selectedSort.value.sort
     const order = selectedSort.value.order
-    const sortQuery = `&sort=${sort}&order=${order}`
+    const sortQuery = `sort=${sort}&order=${order}`
+    const searchQuery = search.value ? `search=${search.value}` : ''
 
-    userStore.fetchPagination(`?page=${page}&limit=${limit}&${sortQuery}`)
+    if (searchQuery) {
+        page = 1
+    }
+
+    await userStore.fetchPagination(`?page=${page}&limit=${limit}&${sortQuery}&${searchQuery}`)
     loading.value = false
 }
 
@@ -61,12 +73,6 @@ const onPageChange = (page) => {
 
     &>* {
         flex: 0 0 30%;
-
-        @for $i from 1 through 6 {
-            & :nth-child(#{$i}) {
-                --stagger-delay: #{($i - 1) * 100}ms;
-            }
-        }
     }
 }
 </style>

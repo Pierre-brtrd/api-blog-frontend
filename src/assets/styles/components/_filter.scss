@@ -56,4 +56,14 @@
             }
         }
     }
+
+    &-fields {
+        @include flexbox($align: center, $gap: 1rem);
+        flex: 0.5;
+    }
+
+    &-search {
+        @include flexbox($align: center, $gap: 0.5em, $wrap: nowrap);
+        flex: 1;
+    }
 }

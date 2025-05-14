@@ -62,5 +62,10 @@ export default async function apiFetch(path, options = {}) {
         return null
     }
 
+    // JUST FOR DEVELOPPEMENT FOR TESTING LOADER
+    if (import.meta.env.VITE_DEVELOPPER_MODE === 'true') {
+        await new Promise(r => setTimeout(r, 400)); // 400 ms
+    }
+
     return payload
 }

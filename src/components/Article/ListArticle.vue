@@ -1,13 +1,17 @@
 <template>
     <div class="filter-grid">
         <p class="text-muted">Nombre total d'articles: {{ articleStore.pagination.total }}</p>
-        <SortFilter :options="sortOptions" v-model="selectedSort" />
+        <div class="filter-fields">
+            <SearchFilter v-model:searchQuery="search" />
+            <SortFilter :options="sortOptions" v-model="selectedSort" />
+        </div>
     </div>
     <div class="list">
         <SkeletonCard v-if="loading" v-for="n in articleStore.pagination.limit" :key="n" />
-        <ArticleCard v-for="article in articleStore.list" :key="article.id" :article="article"
+        <ArticleCard v-if="!loading" v-for="article in articleStore.list" :key="article.id" :article="article"
             @deleted="onArticleDeleted" @switch="changeVisibility" />
     </div>
+    <NotFoundCard v-if="!loading && articleStore.list.length === 0" />
     <PaginationControls :page="articleStore.pagination.page" :pages="articleStore.pagination.pages"
         @change="onPageChange" />
 </template>
@@ -20,6 +24,8 @@ import ArticleCard from './ArticleCard.vue';
 import PaginationControls from '@/components/Filter/PaginationControls.vue';
 import SkeletonCard from '../Common/SkeletonCard.vue';
 import SortFilter from '../Filter/SortFilter.vue';
+import SearchFilter from '../Filter/SearchFilter.vue';
+import NotFoundCard from '../Common/NotFoundCard.vue';
 
 const isAdmin = inject('isAdmin', false)
 const articleStore = useArticleStore()
@@ -33,20 +39,28 @@ const sortOptions = [
 ]
 
 const selectedSort = ref(sortOptions[0])
+const search = ref('')
 
 watch(selectedSort, () => fetchPage(articleStore.pagination.page))
+watch(search, () => fetchPage(articleStore.pagination.page))
 
-function fetchPage(page) {
+async function fetchPage(page) {
     loading.value = true
+
     const limit = articleStore.pagination.limit
     const sort = selectedSort.value.sort
     const order = selectedSort.value.order
-    const sortQuery = `&sort=${sort}&order=${order}`
+    const sortQuery = `sort=${sort}&order=${order}`
+    const searchQuery = search.value ? `search=${search.value}` : ''
+
+    if (searchQuery) {
+        page = 1
+    }
 
     if (isAdmin) {
-        articleStore.fetchPagination(`?page=${page}&limit=${limit}&${sortQuery}`)
+        await articleStore.fetchPagination(`?page=${page}&limit=${limit}&${sortQuery}&${searchQuery}`)
     } else {
-        articleStore.fetchAllEnabledPagination(`?page=${page}&limit=${limit}&${sortQuery}&enabled=true`)
+        await articleStore.fetchAllEnabledPagination(`?page=${page}&limit=${limit}&${sortQuery}&${searchQuery}&enabled=true`)
     }
     loading.value = false
 }
@@ -85,12 +99,6 @@ function changeVisibility(id) {
 
     &>* {
         flex: 0 0 30%;
-
-        @for $i from 1 through 6 {
-            & :nth-child(#{$i}) {
-                --stagger-delay: #{($i - 1) * 100}ms;
-            }
-        }
     }
 }
 </style>

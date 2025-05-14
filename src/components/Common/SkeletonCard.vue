@@ -33,7 +33,7 @@ const props = defineProps({
 }
 
 .skeleton-card {
-    background: #fff;
+    background: #d7d7d7;
     border-radius: $border-radius;
     overflow: hidden;
     box-shadow: 0 0 30px 5px color.adjust($secondary, $alpha: -0.9);
@@ -43,7 +43,7 @@ const props = defineProps({
 
     .skeleton-header {
         flex: 0 0 50%;
-        background: #f6f6f6;
+        background: #999999;
         position: relative;
         overflow: hidden;
 
@@ -59,7 +59,6 @@ const props = defineProps({
                     rgba(255, 255, 255, 0.6) 50%,
                     rgba(255, 255, 255, 0) 100%);
             animation: shimmer 1.2s infinite;
-            animation-delay: var(--stagger-delay, 0ms);
         }
     }
 
@@ -71,7 +70,7 @@ const props = defineProps({
         gap: 0.5rem;
 
         .skeleton-line {
-            background: #f0f0f0;
+            background: #999999;
             border-radius: $border-radius;
             position: relative;
             overflow: hidden;
@@ -88,7 +87,6 @@ const props = defineProps({
                         rgba(255, 255, 255, 0.634) 50%,
                         rgba(255, 255, 255, 0) 100%);
                 animation: shimmer 1.2s infinite;
-                animation-delay: var(--stagger-delay, 0ms);
             }
 
             &.title {
