@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { useFlashStore } from '@/stores/flash'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -57,7 +58,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
+  const flash = useFlashStore()
+
   if (to.meta.requiresAuth && !auth.token) {
+    flash.flash('Vous devez être connecté pour accéder à cette page.', 'danger')
     return next('/login')
   }
   next()

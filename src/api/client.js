@@ -1,4 +1,6 @@
 import { useAuthStore } from '@/stores/auth'
+import router from '@/router'
+import { useFlashStore } from '@/stores/flash';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -23,6 +25,21 @@ export default async function apiFetch(path, options = {}) {
         ...options,
         headers,
     });
+
+    if (response.status === 401) {
+        auth.logout()
+
+        const flash = useFlashStore();
+
+        flash.flash('Votre session a expiré, veuillez vous reconnecter.', 'danger')
+
+        const currentRoute = router.currentRoute.value
+        const requiresAuth = !!currentRoute.meta.requiresAuth
+
+        if (requiresAuth) {
+            router.push({ name: 'login', query: { expire: 1 } })
+        }
+    }
 
     let payload
     const raw = await response.text()
