@@ -1,6 +1,7 @@
 <template>
-    <Form v-slot="{ meta }" class="form card card-body mt-5 w-80 center" validate-on-change validate-on-submit
-        :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
+    <Form :key="props.article?.id ?? 'new'" v-slot="{ meta }" class="form card card-body mt-5 w-80 center"
+        validate-on-change validate-on-submit :validation-schema="schema" :initial-values="initialValues"
+        @submit="onSubmit">
         <div class="field">
             <label for="title">Titre</label>
             <Field name="title" type="text" class="input" placeholder="Titre de votre article" required />
