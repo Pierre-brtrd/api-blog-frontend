@@ -1,0 +1,59 @@
+@use "../abstracts/index" as *;
+@use "sass:color";
+
+.filter {
+    &-grid {
+        @include flexbox(space-between, center);
+    }
+
+    &-dropdown {
+        position: relative;
+        display: inline-block;
+
+        .arrow {
+            display: inline-block;
+            margin-left: 0.5rem;
+            transition: transform 0.2s;
+        }
+        .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        &:hover .filter-options,
+        &:hover button {
+            background: color.scale($secondary, $lightness: -20%);
+        }
+
+        button {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &-options {
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+        background: $secondary;
+        border-radius: 0 0 $border-radius $border-radius;
+        box-shadow: 0 4px 8px color.scale($secondary, $lightness: -20%);
+        z-index: 1;
+        transition: all 0.3s ease;
+        width: 90%;
+        overflow: hidden;
+
+        li {
+            cursor: pointer;
+            padding: 0.3rem 1rem;
+
+            &.active {
+                background: $secondary;
+                font-weight: bold;
+            }
+            &:hover {
+                background: $secondary;
+            }
+        }
+    }
+}

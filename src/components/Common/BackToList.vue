@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade" mode="out-in">
+    <transition name="fade-btn" mode="out-in">
         <teleport to=".container">
             <RouterLink v-if="btnVisible" :to="to" class="btn-primary btn-fixed">
                 <slot>Retour à laliste</slot>
