@@ -1,6 +1,6 @@
 <template>
     <transition name="fade-btn" mode="out-in">
-        <teleport to=".container">
+        <teleport to="main">
             <RouterLink v-if="btnVisible" :to="to" class="btn-primary btn-fixed">
                 <slot>
                     <v-icon name="md-backspace" />

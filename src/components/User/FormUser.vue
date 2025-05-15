@@ -10,14 +10,23 @@
 
         <div class="field">
             <label for="firstName">Prénom</label>
-            <Field name="firstName" as="input" placeholder="John" />
+            <Field name="firstName" as="input" placeholder="John" autocomplete="username" />
             <ErrorMessage name="firstName" class="error-message" />
         </div>
 
         <div class="field">
             <label for="lastName">Nom</label>
-            <Field name="lastName" as="input" placeholder="Doe" />
+            <Field name="lastName" as="input" placeholder="Doe" autocomplete="username" />
             <ErrorMessage name="lastName" class="error-message" />
+        </div>
+
+        <div class="field">
+            <label for="roles">Roles</label>
+            <Field name="roles" as="select" multiple>
+                <option value="ROLE_USER" :selected="initialValues.roles.includes('ROLE_USER')">Utilisateur</option>
+                <option value="ROLE_ADMIN" :selected="initialValues.roles.includes('ROLE_ADMIN')">Administrateur
+                </option>
+            </Field>
         </div>
 
         <div class="field">
@@ -61,6 +70,7 @@ const initialValues = computed(() => ({
     lastName: props.user.lastName,
     plainPassword: '',
     confirmPassword: '',
+    roles: props.user.roles
 }))
 
 function onSubmit(values) {

@@ -19,6 +19,13 @@ textarea {
     }
 }
 
+form {
+    label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+}
+
 .field {
     margin-bottom: 1rem;
 }
