@@ -3,9 +3,7 @@
         <h1 class="title text-center">Création d'un article</h1>
         <hr class="separator-secondary w-50 mx-auto" />
         <FormArticle :article="null" :isNew="true" @submit="onSubmit" />
-        <BackToList :to="{ name: 'admin-articles' }">
-            Retour à la liste
-        </BackToList>
+        <BackToList :to="{ name: 'admin-articles' }" />
     </section>
 </template>
 

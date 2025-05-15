@@ -14,11 +14,17 @@
             </ul>
             <ul class="navbar-btn">
                 <li v-if="isLoggedIn">
-                    <RouterLink :to="{ name: 'profile' }" class="btn-primary">Profile</RouterLink>
+                    <RouterLink :to="{ name: 'profile' }" class="btn-primary">
+                        <v-icon name="md-accountcircle" />
+                        Profile
+                    </RouterLink>
                 </li>
                 <li v-if="isAdmin">
                     <div class="dropdown">
-                        <span class="btn-warning">Admin</span>
+                        <span class="btn-warning">
+                            <v-icon name="md-adminpanelsettings" />
+                            Admin
+                        </span>
                         <ul class="dropdown-content">
                             <li class="dropdown-item">
                                 <RouterLink to="/admin/users">Users</RouterLink>
@@ -34,10 +40,14 @@
 
                 </li>
                 <li v-if="!isLoggedIn">
-                    <RouterLink to="/login" class="btn-primary">Login</RouterLink>
+                    <RouterLink to="/login" class="btn-primary">
+                        <v-icon name="md-login-outlined" />
+                        Login
+                    </RouterLink>
                 </li>
                 <li v-else>
                     <button class="btn-danger" @click="logout">
+                        <v-icon name="md-logout" />
                         Logout
                     </button>
                 </li>

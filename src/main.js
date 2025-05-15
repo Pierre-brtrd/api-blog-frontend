@@ -8,6 +8,12 @@ import { createHead } from '@vueuse/head'
 
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import * as MdIcons from 'oh-vue-icons/icons/md'
+
+const Md = Object.values({ ...MdIcons });
+addIcons(...Md);
+
 import App from './App.vue'
 import router from './router'
 
@@ -19,5 +25,6 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
 app.use(head)
+app.component('v-icon', OhVueIcon)
 
 app.mount('#app')

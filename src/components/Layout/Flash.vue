@@ -1,7 +1,10 @@
 <template>
     <transition name="slide-flash">
         <div v-if="flash.message" :class="`alert-${type}`" @click="flash.clear">
-            <p>{{ flash.message }}</p>
+            <p>
+                <v-icon :name="iconName" animation="pulse" />
+                {{ flash.message }}
+            </p>
         </div>
     </transition>
 </template>
@@ -12,6 +15,18 @@ import { useFlashStore } from '@/stores/flash'
 
 const flash = useFlashStore()
 const type = computed(() => flash.type || 'info')
+const iconName = computed(() => {
+    switch (type.value) {
+        case 'success':
+            return 'md-checkcircle'
+        case 'danger':
+            return 'md-dangerous-sharp'
+        case 'warning':
+            return 'md-warning'
+        default:
+            return 'md-info'
+    }
+})
 </script>
 
 <style scoped lang="scss">

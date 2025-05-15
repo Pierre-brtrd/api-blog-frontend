@@ -9,9 +9,11 @@
             </p>
             <div class="card-btn">
                 <RouterLink :to="{ name: 'admin-user-edit', params: { id: user.id } }" class="btn-warning">
+                    <v-icon name="md-create-round" />
                     Modifier
                 </RouterLink>
                 <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
+                    <v-icon name="md-deleteforever-round" />
                     {{ deleting ? 'Suppression…' : 'Supprimer' }}
                 </button>
             </div>

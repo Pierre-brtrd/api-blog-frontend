@@ -33,6 +33,7 @@
         </div>
 
         <button class="btn-primary" :disabled="!meta.valid">
+            <v-icon name="md-saveas-round" />
             {{ isNew ? 'Créer' : 'Enregistrer' }}
         </button>
     </Form>

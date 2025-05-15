@@ -22,10 +22,12 @@
 
             <div v-if="isAdmin" class="card-btn">
                 <RouterLink :to="{ name: 'admin-article-edit', params: { id: article.id } }" class="btn-warning">
+                    <v-icon name="md-create-round" />
                     Modifier
                 </RouterLink>
 
                 <button class="btn-danger" @click="showConfirm = true" :disabled="deleting">
+                    <v-icon name="md-deleteforever-round" />
                     {{ deleting ? 'Suppression…' : 'Supprimer' }}
                 </button>
             </div>
