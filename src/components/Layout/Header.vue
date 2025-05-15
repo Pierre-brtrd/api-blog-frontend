@@ -45,6 +45,12 @@
                         Login
                     </RouterLink>
                 </li>
+                <li v-if="!isLoggedIn">
+                    <RouterLink :to="{ name: 'register' }" class="btn-warning">
+                        <v-icon name="md-contactpage-sharp" />
+                        Signup
+                    </RouterLink>
+                </li>
                 <li v-else>
                     <button class="btn-danger" @click="logout">
                         <v-icon name="md-logout" />

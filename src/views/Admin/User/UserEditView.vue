@@ -2,7 +2,7 @@
     <section v-if="user" class="container mt-3">
         <h1 class="title text-center">Modification de {{ user?.fullName }}</h1>
         <hr class="separator-secondary w-30 mx-auto" />
-        <FormUser :user="user" :is-new="false" @submit="handleUpdate" />
+        <FormUser :user="user" :is-new="false" :is-admin="true" @submit="handleUpdate" />
         <BackToList :to="{ name: 'admin-users' }" />
     </section>
 </template>

@@ -20,6 +20,12 @@ export const useUsersStore = defineStore('users', {
         async fetch(id) {
             this.user = await apiFetch(`/admin/users/${id}`)
         },
+        async create(user) {
+            return await apiFetch('/profile/register', {
+                method: 'POST',
+                body: JSON.stringify(user),
+            })
+        },
         async update(id, user) {
             await apiFetch(`/admin/users/${id}`, {
                 method: 'PATCH',

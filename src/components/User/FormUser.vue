@@ -1,7 +1,7 @@
 <template>
-    <Form :key="props.user.id" @submit="onSubmit" v-slot="{ handleSubmit, meta }"
+    <Form :key="props.user?.id ?? 'new'" @submit="onSubmit" v-slot="{ handleSubmit, meta }"
         class="form card card-body mt-5 w-70 center" :validation-schema="schema" :initial-values="initialValues"
-        validate-on-mount validate-on-change validate-on-submit>
+        :validate-on-mount="!isNew" validate-on-change validate-on-submit>
         <div class="field">
             <label for="username">Username</label>
             <Field name="username" as="input" placeholder="JohnDoe" autocomplete="username" />
@@ -20,7 +20,7 @@
             <ErrorMessage name="lastName" class="error-message" />
         </div>
 
-        <div class="field">
+        <div v-if="isAdmin" class="field">
             <label for="roles">Roles</label>
             <Field name="roles" as="select" multiple>
                 <option value="ROLE_USER" :selected="initialValues.roles.includes('ROLE_USER')">Utilisateur</option>
@@ -54,8 +54,9 @@ import { Form, Field, ErrorMessage } from 'vee-validate'
 import { creationSchema, updateSchema } from '@/validations/userSchemas'
 
 const props = defineProps({
-    user: { type: Object, required: true },
-    isNew: { type: Boolean, default: true }
+    user: { type: Object },
+    isNew: { type: Boolean, default: true },
+    isAdmin: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['submit'])
@@ -65,12 +66,12 @@ const schema = computed(() =>
 )
 
 const initialValues = computed(() => ({
-    username: props.user.username,
-    firstName: props.user.firstName,
-    lastName: props.user.lastName,
+    username: props.user?.username || '',
+    firstName: props.user?.firstName || '',
+    lastName: props.user?.lastName || '',
     plainPassword: '',
     confirmPassword: '',
-    roles: props.user.roles
+    roles: props.user?.roles || [],
 }))
 
 function onSubmit(values) {

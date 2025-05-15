@@ -30,6 +30,9 @@
             <SkeletonCard v-if="loading" v-for="n in articleStore.userPagination.limit" :key="n" />
             <ArticleCard v-if="!loading" v-for="article in articleStore.userList" :key="article.id"
                 :article="article" />
+            <NotFoundCard v-if="!loading && articleStore.userList.length === 0">
+                Aucun article trouvé
+            </NotFoundCard>
         </div>
     </div>
 </template>
@@ -42,6 +45,7 @@ import { useArticleStore } from '@/stores/articles'
 import { mapRoles } from '@/utils/roleMap'
 import ArticleCard from '@/components/Article/ArticleCard.vue'
 import SkeletonCard from '../Common/SkeletonCard.vue'
+import NotFoundCard from '../Common/NotFoundCard.vue'
 
 useHead({
     title: 'Votre compte - Blog API Rest Vue',
