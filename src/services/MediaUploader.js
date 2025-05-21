@@ -15,6 +15,6 @@ export default class MediaUploader {
     }
 
     abort() {
-        // optionnel : si votre store gère un cancel token, appelez-le ici
+        // optionnel : si le store gère un cancel token
     }
 }

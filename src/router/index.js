@@ -25,32 +25,47 @@ const router = createRouter({
       path: '/admin/users',
       name: 'admin-users',
       component: () => import('@/views/Admin/User/UsersView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
     },
     {
       path: '/admin/users/:id/edit',
       name: 'admin-user-edit',
       component: () => import('@/views/Admin/User/UserEditView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
       props: true
     },
     {
       path: '/admin/articles',
       name: 'admin-articles',
       component: () => import('@/views/Admin/Article/ArticlesView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
     },
     {
       path: '/admin/articles/create',
       name: 'admin-article-create',
       component: () => import('@/views/Admin/Article/ArticleCreateView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
     },
     {
       path: '/admin/articles/:id/edit',
       name: 'admin-article-edit',
       component: () => import('@/views/Admin/Article/ArticleEditView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
       props: true
     },
     {
@@ -68,13 +83,18 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import('@/views/Frontend/ProfileView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true
+      },
     },
     {
       path: '/admin/medias',
       name: 'admin-medias',
       component: () => import('@/views/Admin/Media/MediasView.vue'),
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      },
     }
   ],
 })
@@ -85,9 +105,15 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth && !auth.token) {
     flash.flash('Vous devez être connecté pour accéder à cette page.', 'danger')
-    return next('/login')
+    return next({ name: 'login' })
   }
-  next()
+
+  if (to.meta.requiresAdmin && !auth.user?.roles.includes('ROLE_ADMIN')) {
+    flash.flash('Vous n\'avez pas les droits nécessaires pour accéder à cette page.', 'danger')
+    return next({ name: 'login' })
+  }
+
+  return next()
 })
 
 export default router
