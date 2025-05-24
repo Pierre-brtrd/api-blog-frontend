@@ -34,17 +34,17 @@ onMounted(async () => {
     }
 })
 
+const article = computed(() => {
+    return articleStore.article
+})
+
 useHead({
-    title: articleStore.article?.title,
+    title: computed(() => articleStore.article?.title || 'Titre de l\'article'),
     meta: [
         {
             name: 'description',
-            content: articleStore.article?.shortContent,
+            content: computed(() => articleStore.article?.shortContent || 'Détails de l\'article'),
         },
     ],
-})
-
-const article = computed(() => {
-    return articleStore.article
 })
 </script>
